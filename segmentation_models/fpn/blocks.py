@@ -25,7 +25,7 @@ def Conv(n_filters, kernel_size, activation='relu', use_batchnorm=False, **kwarg
 
 
 def pyramid_block(pyramid_filters=256, segmentation_filters=128, upsample_rate=2,
-                  use_batchnorm=False):
+                  use_batchnorm=False, interpolation = 'nearest'):
     """
     Pyramid block according to:
         http://presentations.cocodataset.org/COCO17-Stuff-FAIR.pdf
@@ -47,7 +47,7 @@ def pyramid_block(pyramid_filters=256, segmentation_filters=128, upsample_rate=2
         x = Conv2D(pyramid_filters, (1, 1))(c)
 
         if m is not None:
-            up = UpSampling2D((upsample_rate, upsample_rate))(m)
+            up = UpSampling2D((upsample_rate, upsample_rate), interpolation=interpolation)(m)
             x = Add()([x, up])
 
         # segmentation head

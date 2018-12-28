@@ -68,7 +68,8 @@ def build_fpn(backbone,
         m, p = pyramid_block(pyramid_filters=pyramid_filters,
                             segmentation_filters=segmentation_filters,
                             upsample_rate=upsample_rates[i],
-                            use_batchnorm=use_batchnorm)(c, m)
+                            use_batchnorm=use_batchnorm,
+                            interpolation = interpolation)(c, m)
         pyramid.append(p)
 
 
